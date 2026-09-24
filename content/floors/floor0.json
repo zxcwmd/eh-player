@@ -1,0 +1,44 @@
+{
+  "floor": 0,
+  "name": "ПАЛАТА №0",
+  "intro": "floor0_intro",
+  "exit_room": "Тамбур",
+  "exit_convo": "",
+  "player_start": [-3, 0],
+  "rooms": [
+    {
+      "name": "Палата №0",
+      "size": [10, 10],
+      "pos": [0, 0],
+      "doors": ["east"],
+      "wave": "",
+      "props": ["bed", "chalk_door", "blue_lamp"]
+    },
+    {
+      "name": "Коридор 0",
+      "size": [14, 5],
+      "pos": [12, 0],
+      "doors": ["west", "east"],
+      "wave": "f0_corridor",
+      "props": ["iv_stand"]
+    },
+    {
+      "name": "Тамбур",
+      "size": [12, 10],
+      "pos": [25, 0],
+      "doors": ["west"],
+      "wave": "f0_tambour",
+      "props": ["cabinet", "drawing"],
+      "exit": true
+    }
+  ],
+  "waves": {
+    "f0_corridor": [
+      {"sedoy": 2}
+    ],
+    "f0_tambour": [
+      {"sedoy": 3},
+      {"sedoy": 2}
+    ]
+  }
+}

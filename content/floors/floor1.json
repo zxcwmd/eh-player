@@ -1,0 +1,159 @@
+{
+  "floor": 1,
+  "name": "ПРИЁМНОЕ ОТДЕЛЕНИЕ",
+  "intro": "floor1_intro",
+  "exit_room": "Выписка",
+  "exit_convo": "",
+  "player_start": [
+    0,
+    0
+  ],
+  "rooms": [
+    {
+      "name": "Приёмное отделение",
+      "size": [
+        20,
+        16
+      ],
+      "pos": [
+        0,
+        0
+      ],
+      "doors": [
+        "east"
+      ],
+      "wave": "f1_reception",
+      "props": [
+        "desk",
+        "iv_stand",
+        "bed"
+      ]
+    },
+    {
+      "name": "Коридор 1",
+      "size": [
+        16,
+        5
+      ],
+      "pos": [
+        18,
+        0
+      ],
+      "doors": [
+        "west",
+        "east",
+        "north",
+        "south"
+      ],
+      "wave": "f1_corridor",
+      "props": [
+        "iv_stand"
+      ]
+    },
+    {
+      "name": "Осмотр 1",
+      "size": [
+        12,
+        12
+      ],
+      "pos": [
+        18,
+        -8.5
+      ],
+      "doors": [
+        "north"
+      ],
+      "wave": "f1_exam1",
+      "props": [
+        "bed",
+        "blue_lamp"
+      ]
+    },
+    {
+      "name": "Осмотр 2",
+      "size": [
+        12,
+        12
+      ],
+      "pos": [
+        18,
+        8.5
+      ],
+      "doors": [
+        "south"
+      ],
+      "wave": "f1_exam2",
+      "props": [
+        "bed",
+        "cabinet"
+      ]
+    },
+    {
+      "name": "Выписка",
+      "size": [
+        16,
+        12
+      ],
+      "pos": [
+        34,
+        0
+      ],
+      "doors": [
+        "west"
+      ],
+      "wave": "f1_boss",
+      "props": [
+        "desk",
+        "drawing"
+      ],
+      "exit": true
+    }
+  ],
+  "waves": {
+    "f1_reception": [
+      {
+        "sedoy": 2
+      },
+      {
+        "nurse": 1,
+        "sedoy": 2
+      }
+    ],
+    "f1_corridor": [
+      {
+        "pill": 1,
+        "sedoy": 2
+      }
+    ],
+    "f1_exam1": [
+      {
+        "sedoy": 3
+      },
+      {
+        "nurse": 1
+      }
+    ],
+    "f1_exam2": [
+      {
+        "pill": 2
+      },
+      {
+        "sedoy": 2,
+        "nurse": 1
+      }
+    ],
+    "f1_boss": [
+      {
+        "nurse": 1,
+        "sedoy": 2
+      },
+      {
+        "nurse": 1
+      },
+      {
+        "nurse": 1,
+        "sedoy": 2
+      }
+    ]
+  }
+}

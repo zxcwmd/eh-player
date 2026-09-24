@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" fill="#0b0d0d"/>
+  <rect x="44" y="18" width="40" height="86" fill="none" stroke="#e8edea" stroke-width="3"/>
+  <line x1="44" y1="104" x2="84" y2="104" stroke="#e8edea" stroke-width="3"/>
+  <circle cx="76" cy="62" r="3" fill="#d62828"/>
+  <path d="M20 108 L108 108" stroke="#d62828" stroke-width="2" stroke-dasharray="4 6"/>
+  <text x="64" y="122" font-family="monospace" font-size="12" fill="#7a8c85" text-anchor="middle">НИЖЕ</text>
+</svg>
