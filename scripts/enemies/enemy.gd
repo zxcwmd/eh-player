@@ -106,7 +106,7 @@ func _timers(delta: float) -> void:
 		ai = AI.FLEE
 	if burn_time > 0.0:
 		burn_time -= delta
-		take_hit(burn_dps * delta, Vector3.ZERO, global_position, true, false, false)
+		take_hit(burn_dps * delta, Vector3.ZERO, global_position, true, false)
 		if burn_time <= 0.0 and randf() < 0.3:
 			Audio.play("hit_light", -16.0, 0.7)
 	if _hit_flash > 0.0:

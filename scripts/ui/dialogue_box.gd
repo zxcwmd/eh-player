@@ -36,10 +36,10 @@ const PORTRAIT_FG := {
 func _ready() -> void:
 	layer = 11
 	_build()
-	Dialogue.dialogue_started.connect(func(_id: String) -> void: show())
+	Dialogue.dialogue_started.connect(func(_id: String) -> void: open_box())
 	Dialogue.node_entered.connect(_on_node)
 	Dialogue.choices_offered.connect(_on_choices_offered)
-	Dialogue.dialogue_ended.connect(func(_id: String) -> void: hide())
+	Dialogue.dialogue_ended.connect(func(_id: String) -> void: close_box())
 	Dialogue.voice_set.connect(_on_voice_set)
 	Dialogue.choice_made.connect(_on_choice_made)
 	Dialogue.timed_out.connect(_on_timed_out)
@@ -145,7 +145,7 @@ func _build() -> void:
 
 func _on_node(node: Dictionary) -> void:
 	if not visible:
-		show()
+		open_box()
 	name_label.text = str(node.get("speaker", ""))
 	text_label.text = ""
 	var speaker := str(node.get("speaker", ""))
@@ -227,7 +227,7 @@ func _shown_y() -> float:
 	return get_viewport().get_visible_rect().size.y - BOX_H - 16.0
 
 
-func show() -> void:
+func open_box() -> void:
 	visible = true
 	panel.offset_top = _hidden_y()
 	var tw := panel.create_tween()
@@ -235,7 +235,7 @@ func show() -> void:
 	tw.parallel().tween_property(panel, "offset_bottom", _shown_y() + BOX_H, 0.18)
 
 
-func hide() -> void:
+func close_box() -> void:
 	var tw := panel.create_tween()
 	tw.tween_property(panel, "offset_top", _hidden_y(), 0.16)
 	tw.parallel().tween_property(panel, "offset_bottom", _hidden_y() + BOX_H, 0.16)

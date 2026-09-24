@@ -23,6 +23,7 @@ var weapon_label: Label
 var death_label: Label
 var hint_label: Label
 var _stamps: Array[Label] = []
+var _coin_shown: int = -1
 var _style_score: float = 0.0
 var _death_timer: Timer
 
@@ -34,7 +35,6 @@ func _ready() -> void:
 	Style.rank_changed.connect(_on_rank_changed)
 	Style.score_changed.connect(_on_score_changed)
 	Blood.thirst_warning.connect(_on_thirst)
-	Coin.combo_changed.connect(_on_coin_combo)
 	Dialogue.dialogue_started.connect(func(_id: String) -> void: hint_label.text = "1–4 — ответить · ПРОБЕЛ — дальше · молчание — тоже ответ")
 	Dialogue.dialogue_ended.connect(func(_id: String) -> void: hint_label.text = "")
 	GameState.floor_changed.connect(_on_floor_changed)
@@ -54,6 +54,17 @@ func _process(_delta: float) -> void:
 			if (n as Node3D).global_position.distance_to(p.global_position) < 2.6:
 				prompt_label.text = str(n.get_meta("prompt", "[E]"))
 				break
+	# монеты в воздухе: сигнал инстанса недоступен через class_name — читаем счётчик
+	var cc := Coin.current_combo
+	if cc != _coin_shown:
+		_coin_shown = cc
+		if cc > 0:
+			coins_label.text = "МОНЕТЫ В ВОЗДУХЕ ×%d — СТРЕЛЯЙ ПО НИМ" % cc
+			coins_label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.5))
+		else:
+			coins_label.text = "МОНЕТЫ ×0 [R — бросок]"
+			coins_label.add_theme_color_override("font_color", Color(0.95, 0.82, 0.4))
+
 	# шкала стиля
 	rank_bar.scale.x = clampf(_style_score / 4200.0, 0.02, 1.0)
 	if Style.hallucinating():
@@ -222,15 +233,6 @@ func _on_rank_changed(_old: String, new_rank: String) -> void:
 
 func _on_score_changed(score: float) -> void:
 	_style_score = score
-
-
-func _on_coin_combo(count: int) -> void:
-	if count > 0:
-		coins_label.text = "МОНЕТЫ В ВОЗДУХЕ ×%d — СТРЕЛЯЙ ПО НИМ" % count
-		coins_label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.5))
-	else:
-		coins_label.text = "МОНЕТЫ ×0 [R — бросок]"
-		coins_label.add_theme_color_override("font_color", Color(0.95, 0.82, 0.4))
 
 
 # ============================================================ СОБЫТИЯ

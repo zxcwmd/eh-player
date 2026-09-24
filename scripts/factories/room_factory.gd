@@ -523,7 +523,7 @@ static func child_drawing(pos: Vector3, parent: Node3D, rot_y: float = 0.0) -> N
 		img.set_pixel(30, 70 - i, pencil)
 		img.set_pixel(98, 70 - i, pencil)
 	for i in 40:
-		var y := 30 + abs(i - 20)
+		var y: int = 30 + abs(i - 20)
 		img.set_pixel(30 + i + 14, clampi(y, 20, 40), Color(0.6, 0.2, 0.2))
 	# солнце
 	for a in 64:
