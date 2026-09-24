@@ -220,6 +220,7 @@ func to_dict() -> Dictionary:
 
 
 func from_dict(d: Dictionary) -> void:
-	for k in d.keys():
-		if k in self:
+	var known := to_dict()
+	for k in known.keys():
+		if d.has(k):
 			set(k, d[k])

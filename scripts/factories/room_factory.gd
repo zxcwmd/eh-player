@@ -487,10 +487,11 @@ static func reception_desk(pos: Vector3, parent: Node3D) -> Node3D:
 
 
 ## Ростовые отметки на стене детского корпуса.
-static func growth_marks(pos: Vector3, parent: Node3D) -> Node3D:
+static func growth_marks(pos: Vector3, parent: Node3D, rot_y: float = 0.0) -> Node3D:
 	var root := Node3D.new()
 	root.name = "GrowthMarks"
 	root.position = pos
+	root.rotation.y = rot_y
 	parent.add_child(root)
 	var chalk := FxFactory.mat(Color(0.90, 0.89, 0.84), {"unshaded": true})
 	for i in 12:

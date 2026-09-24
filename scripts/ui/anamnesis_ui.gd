@@ -96,7 +96,7 @@ func _refresh() -> void:
 		var bar := ""
 		for i in mini(v, 24):
 			bar += "■"
-		txt += "  %-12s %2d %s\n" % [t, v, bar]
+		txt += "  %s — %d %s\n" % [t, v, bar]
 	txt += "\n"
 
 	txt += "[color=#b03028]ГОЛОСА В ГОЛОВЕ:[/color]\n"

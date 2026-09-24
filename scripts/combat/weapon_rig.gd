@@ -486,6 +486,11 @@ func _swing_arm() -> void:
 	tw.tween_property(hand, "rotation:x", 0.0, 0.16)
 
 
+func _tracer_done(mi: MeshInstance3D) -> void:
+	mi.visible = false
+	_tracer_pool.append(mi)
+
+
 func _spawn_tracer(from: Vector3, to: Vector3, color: Color, life: float = 0.07) -> void:
 	var host := get_tree().current_scene
 	if host == null:
@@ -510,7 +515,7 @@ func _spawn_tracer(from: Vector3, to: Vector3, color: Color, life: float = 0.07)
 	mi.visible = true
 	var tw := mi.create_tween()
 	tw.tween_property(m, "albedo_color:a", 0.0, life)
-	tw.tween_callback(func() -> void: mi.visible = false; _tracer_pool.append(mi))
+	tw.tween_callback(_tracer_done.bind(mi))
 
 
 func _spawn_arc(from: Vector3, to: Vector3) -> void:

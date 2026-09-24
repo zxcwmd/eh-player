@@ -20,6 +20,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle()
 
 
+func _on_resume() -> void:
+	toggle()
+	resume.emit()
+
+
+func _on_save() -> void:
+	SaveSystem.save_game()
+	Audio.play("chalk", -8.0)
+
+
 func toggle() -> void:
 	visible = not visible
 	get_tree().paused = visible
@@ -58,14 +68,14 @@ func _build() -> void:
 	resume_b.text = "ПРОДОЛЖИТЬ"
 	resume_b.custom_minimum_size = Vector2(360, 46)
 	resume_b.add_theme_font_size_override("font_size", 20)
-	resume_b.pressed.connect(func() -> void: toggle(); resume.emit())
+	resume_b.pressed.connect(_on_resume)
 	box.add_child(resume_b)
 
 	var save_b := Button.new()
 	save_b.text = "ЗАПИСАТЬ В КАРТУ (сохранить)"
 	save_b.custom_minimum_size = Vector2(360, 46)
 	save_b.add_theme_font_size_override("font_size", 20)
-	save_b.pressed.connect(func() -> void: SaveSystem.save_game(); Audio.play("chalk", -8.0))
+	save_b.pressed.connect(_on_save)
 	box.add_child(save_b)
 
 	var menu_b := Button.new()

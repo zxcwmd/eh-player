@@ -78,7 +78,7 @@ func _ready() -> void:
 	Style.rank_changed.connect(_on_rank_changed)
 	Reality.layer_changed.connect(_on_layer_changed)
 	Blood.healed.connect(_on_healed)
-	GameState.floor_changed.connect(func(_f: int) -> void: punch_fov(4.0, 0.4); shake(0.25))
+	GameState.floor_changed.connect(_on_floor_changed)
 
 
 func _process(delta: float) -> void:
@@ -222,6 +222,11 @@ func _update_threats() -> void:
 
 
 # ============================================================ реакции
+
+func _on_floor_changed(_floor_index: int) -> void:
+	punch_fov(4.0, 0.4)
+	shake(0.25)
+
 
 func _on_style_stamp(_text: String, points: int) -> void:
 	var amount := clampf(float(points) / 220.0, 0.4, 7.0)
