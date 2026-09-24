@@ -8,7 +8,7 @@ signal parried(by: Node)
 
 @export var speed: float = 22.0
 @export var damage: float = 8.0
-@export var gravity: float = 0.0
+@export var fall_gravity: float = 0.0
 @export var lifetime: float = 6.0
 @export var parryable: bool = true
 @export var crit_on_head: bool = true
@@ -58,8 +58,8 @@ func _physics_process(delta: float) -> void:
 	if _age > lifetime:
 		queue_free()
 		return
-	if gravity > 0.0:
-		direction.y -= gravity * delta
+	if fall_gravity > 0.0:
+		direction.y -= fall_gravity * delta
 		direction = direction.normalized()
 	global_position += direction * speed * delta
 	if _trail:

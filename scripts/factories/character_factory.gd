@@ -138,11 +138,13 @@ static func lida(scale_factor: float = 1.0, rust: bool = false) -> Node3D:
 	root.name = "LidaModel"
 	var band := root.get_node_or_null("ArmR")
 	var skin := root.get_node_or_null("ArmL")
-	if band and skin and band is MeshInstance3D and skin is MeshInstance3D:
-		var m1: Material = (band as MeshInstance3D).material_override
-		var m2: Material = (skin as MeshInstance3D).material_override
-		(band as MeshInstance3D).material_override = m2
-		(skin as MeshInstance3D).material_override = m1
+	if band != null and skin != null and band is MeshInstance3D and skin is MeshInstance3D:
+		var b := band as MeshInstance3D
+		var k := skin as MeshInstance3D
+		var m1: Material = b.material_override
+		var m2: Material = k.material_override
+		b.material_override = m2
+		k.material_override = m1
 	var patch := root.get_node_or_null("EyePatch")
 	if patch:
 		patch.visible = false
@@ -160,8 +162,9 @@ static func lida(scale_factor: float = 1.0, rust: bool = false) -> Node3D:
 	smile.position = Vector3(0, 1.255, 0.147)
 	root.add_child(smile)
 	var hair := root.get_node_or_null("Hair")
-	if hair and hair is MeshInstance3D:
-		(hair as MeshInstance3D).scale = Vector3(1.0, 1.5, 1.05)
+	if hair != null and hair is MeshInstance3D:
+		var h := hair as MeshInstance3D
+		h.scale = Vector3(1.0, 1.5, 1.05)
 	return root
 
 
@@ -206,8 +209,9 @@ static func mother(scale_factor: float = 1.0, in_formalin: bool = false) -> Node
 	var hands := FxFactory.mat(Color(0.82, 0.42, 0.40))
 	for n in ["ArmL", "ArmR", "HandL", "HandR"]:
 		var c := root.get_node_or_null(n)
-		if c and c is MeshInstance3D:
-			(c as MeshInstance3D).material_override = hands
+		if c != null and c is MeshInstance3D:
+			var cc := c as MeshInstance3D
+			cc.material_override = hands
 	if in_formalin:
 		var jar := MeshInstance3D.new()
 		jar.name = "FormalinJar"
@@ -389,8 +393,8 @@ static func mirror_vera(scale_factor: float = 1.0) -> Node3D:
 
 static func _apply_mirror_material(n: Node) -> void:
 	if n is MeshInstance3D:
-		var m := FxFactory.mat(Color(0.78, 0.85, 0.88), {"metallic": 1.0, "roughness": 0.06})
-		(n as MeshInstance3D).material_override = m
+		var mi := n as MeshInstance3D
+		mi.material_override = FxFactory.mat(Color(0.78, 0.85, 0.88), {"metallic": 1.0, "roughness": 0.06})
 	for c in n.get_children():
 		_apply_mirror_material(c)
 

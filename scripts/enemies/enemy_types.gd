@@ -92,7 +92,7 @@ class Nurse extends Enemy:
 		p.parryable = true
 		p.speed = 19.0
 		p.damage = 11.0
-		p.gravity = 2.2
+		p.fall_gravity = 2.2
 		p.lifetime = 4.0
 		p.setup(aim, 19.0, 11.0, false, self)
 		Audio.play("shoot", -6.0, 1.7)
@@ -307,7 +307,7 @@ class Pill extends Enemy:
 			p.owner_node = self
 			p.parryable = true
 			p.setup(aim.normalized(), 16.0, 8.0, false, self)
-			p.gravity = 1.2
+			p.fall_gravity = 1.2
 		Audio.play("shoot", -8.0, 1.2)
 
 

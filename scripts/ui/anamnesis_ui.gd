@@ -149,4 +149,5 @@ func _refresh() -> void:
 
 	var pages_title := root.find_child("PagesTitle", true, false)
 	if pages_title is Label:
-		(pages_title as Label).text = "НАЙДЕННЫЕ СТРАНИЦЫ (%d / 61)" % GameState.pages_found.size()
+		var pt := pages_title as Label
+		pt.text = "НАЙДЕННЫЕ СТРАНИЦЫ (%d / 61)" % GameState.pages_found.size()

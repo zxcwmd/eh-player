@@ -96,12 +96,15 @@ func _apply_visibility() -> void:
 
 func _set_node_active(n: Node, active: bool) -> void:
 	if n is VisualInstance3D:
-		(n as VisualInstance3D).visible = active
+		var v := n as VisualInstance3D
+		v.visible = active
 	if n is CollisionObject3D:
-		(n as CollisionObject3D).process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
-		for c in (n as CollisionObject3D).get_children():
+		var cobj := n as CollisionObject3D
+		cobj.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED
+		for c in cobj.get_children():
 			if c is CollisionShape3D:
-				(c as CollisionShape3D).disabled = not active
+				var cs := c as CollisionShape3D
+				cs.disabled = not active
 	if "layer_active" in n:
 		n.layer_active = active
 
